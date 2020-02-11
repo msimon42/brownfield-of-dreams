@@ -18,6 +18,14 @@
   <ul>
     <li> <%= @user.first_name  %> <%= @user.last_name %> </li>
     <li> <%= @user.email %> </li>
+    <li>
+      Status:
+      <% if @user.activated %>
+        Active
+      <% else %>
+        <span class='alert-red'>This account has not yet been activated. Please check your email.</span>
+      <% end %>
+    </li>
   </ul>
   <section>
     <h1>Bookmarked Segments</h1>
@@ -38,7 +46,7 @@
           following or being followed by create an account with us, you can add
           them as friends by clicking the link next to their usernames below.
         </p>
-      <% end %>  
+      <% end %>
   </section>
   <section>
     <h1>Github</h1>

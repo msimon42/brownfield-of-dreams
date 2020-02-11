@@ -20,7 +20,7 @@
     <li> <%= @user.email %> </li>
     <li>
       Status:
-      <% if @user.activated %>
+      <% if @user.active %>
         Active
       <% else %>
         <span class='alert-red'>This account has not yet been activated. Please check your email.</span>

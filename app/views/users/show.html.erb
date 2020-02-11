@@ -1,6 +1,7 @@
 <section class="dashboard-main">
   <h1> <%= @user.first_name %>'s Dashboard </h1>
 
+  <nav>
   <%= button_to 'Log Out',
                 logout_path,
                 method: 'delete',
@@ -10,14 +11,28 @@
                 '/auth/github',
                 class: 'link-button' unless @user.github_token %>
 
+  <%= link_to 'Send an Invite',
+                '/invite',
+                class: 'link-button' %>
+
   <%= button_to 'Disconnect GitHub Account',
                 "/users/#{@user.id}",
-                :method => :patch if @user.github_token %>
+                :method => :patch,
+                class: "btn btn-primary mb1 bg-teal" if @user.github_token %>
+
+  </nav>
 
   <h3>Account Details</h3>
   <ul>
-    <li> <%= @user.first_name  %> <%= @user.last_name %> </li>
-    <li> <%= @user.email %> </li>
+    <li> Name: <%= @user.first_name  %> <%= @user.last_name %> </li>
+    <li> Email: <%= @user.email %> </li>
+    <li> Status:
+      <% if @user.activated %>
+        Active
+      <% else %>
+        This account has not yet been activated. Please check your email.
+      <% end %>
+    </li>
   </ul>
   <section>
     <h1>Bookmarked Segments</h1>
@@ -38,7 +53,7 @@
           following or being followed by create an account with us, you can add
           them as friends by clicking the link next to their usernames below.
         </p>
-      <% end %>  
+      <% end %>
   </section>
   <section>
     <h1>Github</h1>

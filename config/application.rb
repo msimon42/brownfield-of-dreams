@@ -29,5 +29,8 @@ module PersonalProject
 
     # Don't generate system test files.
     config.generators.system_tests = nil
+
+    # Set default host for links in mailers
+    config.action_mailer.default_url_options = { host: 'localhost:3000' }
   end
 end

@@ -35,7 +35,10 @@ Rails.application.routes.draw do
   # Is this being used?
   get '/video', to: 'video#show'
 
-  resources :users, only: [:new, :create, :update, :edit]
+  resources :users, only: [:new, :create, :update, :edit] do
+    get '/activate', to: 'activation#update', as: 'activation'
+    get '/activated', to: 'activation#index'
+  end
 
   resources :tutorials, only: [:show, :index] do
     resources :videos, only: [:show, :index]
@@ -47,4 +50,7 @@ Rails.application.routes.draw do
   get '/auth/:provider/callback', to: 'users#update'
 
   resources :friendships, only: [:create, :destroy]
+
+  get '/invite', to: 'invite#index'
+  post '/invite', to: 'invite#create'
 end

@@ -14,7 +14,7 @@ class UsersController < ApplicationController
       redirect_to dashboard_path
     else
       flash[:error] = user.errors.full_messages.to_sentence
-      redirect_back fallback_location: root_path
+      redirect_back fallback_location: register_path
     end
   end
 

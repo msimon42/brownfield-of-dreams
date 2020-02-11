@@ -1,0 +1,5 @@
+<% if @user.active %>
+  Thank you! Your account is now activated.
+<% else %>
+  We had a problem verifying your account. Please <%= link_to 'contact support', 'https://github.com/msimon42/brownfield-of-dreams/issues' %>.
+<% end %>

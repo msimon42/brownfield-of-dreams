@@ -13,8 +13,8 @@ class UsersController < ApplicationController
       session[:user_id] = user.id
       redirect_to dashboard_path
     else
-      flash[:error] = 'Username already exists'
-      render :new
+      flash[:error] = user.errors.full_messages.to_sentence
+      redirect_back fallback_location: register_path
     end
   end
 

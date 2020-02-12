@@ -1,6 +1,10 @@
 require 'rails_helper'
 
 RSpec.describe Tutorial, type: :model do
+  describe 'relationships' do
+    it {should have_many(:videos).dependent(:destroy)}
+  end
+
   describe 'class methods' do
     it 'non_classroom' do
       @tutorial_1 = create :tutorial

@@ -15,7 +15,7 @@ feature 'As a logged in user', :vcr do
       @video_2 = create(:video, tutorial: @tutorial_2)
       @video_3 = create(:video, tutorial: @tutorial_1)
       @video_4 = create(:video, tutorial: @tutorial_3) # not bookmarked
-      @user.videos << [@video_1, @video_3, @video_2] # shuffled order
+      @user.videos << [@video_1, @video_2, @video_3]
 
       visit '/dashboard'
     end
@@ -30,21 +30,15 @@ feature 'As a logged in user', :vcr do
     end
 
     it 'And they should be organized by which tutorial they are a part of' do
-      within "#tutorial-#{@tutorial_1.id}" do
-        expect(page).to have_content(@video_1.title)
-        expect(page).to have_content(@video_3.title)
+      within ".bookmarked" do
+        expect(page.body.index(@video_3.title)).to be < page.body.index(@video_2.title)
+        expect(page.body.index(@video_1.title)).to be < page.body.index(@video_2.title)
       end
-
-      within "#tutorial-#{@tutorial_2.id}" do
-        expect(page).to have_content(@video_2.title)
-      end
-
-      expect(page).not_to have_css("#tutorial-#{@tutorial_3.id}")
     end
 
     it 'And the videos should be ordered by their position' do
-      within "#tutorial-#{@tutorial_1.id}" do
-        expect(page.index(@video_3.title)).to be < page.index(@video_1.title)
+      within ".bookmarked" do
+        expect(page.body.index(@video_3.title)).to be < page.body.index(@video_1.title)
       end
     end
   end

@@ -32,6 +32,8 @@ describe 'vister can create an account', :js, :vcr do
     expect(page).to have_content(first_name)
     expect(page).to have_content(last_name)
 
+    expect(ActionMailer::Base.deliveries.length).to eq(1)
+
     expect(page).to have_content("This account has not yet been activated. Please check your email.")
 
     expect(page).to_not have_content('Sign In')

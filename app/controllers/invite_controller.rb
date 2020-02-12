@@ -3,14 +3,14 @@ class InviteController < ApplicationController
   end
 
   def create
-    token = current_user.token || ENV['GITHUB_TOKEN']
-    data = GithubService.github_user_data_by_name(params[:github_handle], token)
+    token = current_user.github_token || ENV['GITHUB_TOKEN']
+    data = GithubService.new.github_user_data_by_name(params[:github_handle], token)
     if data['email']
-      # mailer call, send user and invitee
-      # flash success message
-    # else
-      # flash error message
-    # end
+      InviteMailer.send_invite(current_user, data).deliver_now
+      flash[:success] = 'Successfully sent invite!'
+    else
+      flash[:error] = "The Github user you selected doesn't have an email address associated with their account."
+    end
     redirect_to '/dashboard'
   end
 end

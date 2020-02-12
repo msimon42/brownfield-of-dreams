@@ -1,3 +1,4 @@
+Friendship.destroy_all
 User.destroy_all
 
 prework_tutorial_data = {

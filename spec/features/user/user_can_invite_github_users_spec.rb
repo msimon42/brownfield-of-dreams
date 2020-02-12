@@ -13,15 +13,23 @@ RSpec.describe 'As a registered user' do
       click_on 'Send an Invite'
     end
 
+    it 'an email should be sent' do
+      expect(ActionMailer::Base.deliveries.length).to eq(1)
+    end
+
     it 'Then I should be on /invite' do
       expect(current_path).to eq('/invite')
     end
 
-    describe 'And when I fill in "Github Handle" with valid username of person with public email and click "Send Invite"' do
+    describe 'And when I fill in "Github Handle" with valid username of person with public email and click "Send Invite"', :vcr do
       before(:each) do
         fill_in 'Github Handle', with: 'DanielEFrampton'
 
         click_on 'Send Invite'
+      end
+
+      it 'an email should not have be sent' do
+        expect(ActionMailer::Base.deliveries.length).to eq(0)
       end
 
       it 'Then I should be on /dashboard' do
@@ -33,7 +41,7 @@ RSpec.describe 'As a registered user' do
       end
     end
 
-    describe 'And when I fill in "Github Handle" with valid username of person with public email and click "Send Invite"' do
+    describe 'And when I fill in "Github Handle" with valid username of person with public email and click "Send Invite"', :vcr do
       before(:each) do
         fill_in 'Github Handle', with: 'mtsimon'
 

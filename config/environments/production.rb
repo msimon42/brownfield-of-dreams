@@ -97,9 +97,13 @@ Rails.application.configure do
   config.action_mailer.smtp_settings = {
       address:        "smtp.sendgrid.net",
       port:           587,
-      domain:         "https://video-field.herokuapp.com",
+      domain:         "heroku.com",
       authentication: :plain,
       user_name:      'apikey',
       password:       ENV['SENDGRID_API_KEY']
-}
+  }
+
+  config.action_mailer.default_url_options = { host: "https://video-field.herokuapp.com" }
+
+
 end

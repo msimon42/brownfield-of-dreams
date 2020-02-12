@@ -10,6 +10,10 @@
                 '/auth/github',
                 class: 'link-button' unless @user.github_token %>
 
+  <%= link_to 'Send an Invite',
+                '/invite',
+                class: 'link-button' %>
+
   <%= button_to 'Disconnect GitHub Account',
                 "/users/#{@user.id}",
                 :method => :patch if @user.github_token %>

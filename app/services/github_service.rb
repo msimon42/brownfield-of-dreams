@@ -17,6 +17,10 @@ class GithubService
     end
   end
 
+  def github_user_data_by_name(github_handle, token)
+    get_json("users/#{github_handle}", token).slice('name', 'email')
+  end
+
   private
 
     def connection

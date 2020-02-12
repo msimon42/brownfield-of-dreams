@@ -31,8 +31,18 @@
       <% end %>
     </li>
   </ul>
-  <section>
+  <section class="bookmarked">
     <h1>Bookmarked Segments</h1>
+    <% if @user.videos %>
+      <ul>
+        <% @user.videos.ordered.each do |video| %>
+          <li>
+            <%= link_to video.tutorial.title, "/tutorials/#{video.tutorial.id}" %>, Tutorial Segment #<%= video.position + 1 %>,
+            <%= link_to video.title, "/tutorials/#{video.tutorial.id}?video_id=#{video.id}" %>
+          </li>
+        <% end %>
+      </ul>
+    <% end %>
   </section>
 
   <% if @user.github_token %>

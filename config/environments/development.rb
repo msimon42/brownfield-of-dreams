@@ -40,6 +40,7 @@ Rails.application.configure do
   # Mailcatcher setup
   config.action_mailer.delivery_method = :smtp
   config.action_mailer.smtp_settings = { :address => "localhost", :port => 1025 }
+  config.action_mailer.default_url_options = { host: 'localhost:3000' }
 
   # Print deprecation notices to the Rails logger.
   config.active_support.deprecation = :log
@@ -64,13 +65,4 @@ Rails.application.configure do
   # Use an evented file watcher to asynchronously detect changes in source code,
   # routes, locales, etc. This feature depends on the listen gem.
   config.file_watcher = ActiveSupport::EventedFileUpdateChecker
-
-  config.action_mailer.smtp_settings = {
-      address:        "smtp.sendgrid.net",
-      port:           587,
-      domain:         "http://localhost:3000",
-      authentication: :plain,
-      user_name:      'apikey',
-      password:       ENV['SENDGRID_API_KEY']
-}
 end

@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
-    @user = current_user
+    @user = User.where(id: current_user.id).includes(videos: :tutorial).first
   end
 
   def new

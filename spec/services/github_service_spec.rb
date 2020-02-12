@@ -3,6 +3,18 @@ require 'rails_helper'
 feature GithubService do
   feature 'methods' do
     feature 'instance methods' do
+      feature 'github_user_data_by_name' do
+        scenario 'returns user name and email for GH user with given username', :vcr do
+          token = ENV['GITHUB_TOKEN']
+
+          expected = {'name' => 'Daniel Frampton',
+                      'email' => 'daniel.e.frampton@gmail.com'}
+
+          actual = GithubService.new.github_user_data_by_name('DanielEFrampton', token)
+          expect(actual).to eq(expected)
+        end
+      end
+
       feature 'user_repos' do
         scenario "returns repo objects for first five repos associated with user's github token", :vcr do
           token = ENV['GITHUB_TOKEN']

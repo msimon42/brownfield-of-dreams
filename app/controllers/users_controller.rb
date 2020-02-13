@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
   def show
-    @user = current_user
+    @user = User.where(id: current_user.id).includes(videos: :tutorial).first
   end
 
   def new
@@ -32,14 +32,14 @@ class UsersController < ApplicationController
     end
 
     def new_github_id
-      if request.env['omniauth.auth']
-        request.env['omniauth.auth']['uid']
-      end
+      return unless request.env['omniauth.auth']
+
+      request.env['omniauth.auth']['uid']
     end
 
     def new_github_token
-      if request.env['omniauth.auth']
-        request.env['omniauth.auth']['credentials']['token']
-      end
+      return unless request.env['omniauth.auth']
+
+      request.env['omniauth.auth']['credentials']['token']
     end
 end

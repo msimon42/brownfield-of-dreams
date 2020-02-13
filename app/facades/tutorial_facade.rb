@@ -23,6 +23,7 @@ class TutorialFacade < SimpleDelegator
 
   def current_user_id
     return @user.id if @user
+
     'visitor'
   end
 

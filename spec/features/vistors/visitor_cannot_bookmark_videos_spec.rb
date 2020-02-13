@@ -16,3 +16,4 @@ RSpec.describe 'As a visitor' do
       expect(page).to have_content("You must be logged in to bookmark videos.")
     end
   end
+end

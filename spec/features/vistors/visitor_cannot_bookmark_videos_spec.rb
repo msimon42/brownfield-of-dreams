@@ -3,6 +3,8 @@ require 'rails_helper'
 RSpec.describe 'As a visitor' do
   describe 'when I click the bookmark button on a video page' do
     before(:each) do
+      @tutorial = create(:tutorial)
+      @video = create(:video, tutorial: @tutorial)
       visit '/tutorials/1?video_id=1'
 
       click_on 'Bookmark'

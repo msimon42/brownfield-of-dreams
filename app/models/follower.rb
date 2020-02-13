@@ -8,6 +8,6 @@ class Follower
   end
 
   def exists_as_user?
-    User.exists?(github_id: self.github_id)
+    User.exists?(github_id: github_id)
   end
 end

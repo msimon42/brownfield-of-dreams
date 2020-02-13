@@ -3,7 +3,7 @@ class UserVideosController < ApplicationController
 
   def create
     if params[:user_id] == 'visitor'
-      flash[:error] = "You must be logged in to bookmark videos."
+      flash[:error] = 'You must be logged in to bookmark videos.'
     else
       user_video = UserVideo.new(user_video_params)
       if current_user.user_videos.find_by(video_id: user_video.video_id)

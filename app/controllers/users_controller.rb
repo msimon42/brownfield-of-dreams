@@ -32,9 +32,7 @@ class UsersController < ApplicationController
     end
 
     def new_github_id
-      if request.env['omniauth.auth']
-        request.env['omniauth.auth']['uid']
-      end
+      request.env['omniauth.auth']['uid'] if request.env['omniauth.auth']
     end
 
     def new_github_token

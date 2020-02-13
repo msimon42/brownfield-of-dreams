@@ -1,6 +1,5 @@
 class InviteController < ApplicationController
-  def new
-  end
+  def new; end
 
   def create
     token = current_user.github_token || ENV['GITHUB_TOKEN']

@@ -17,13 +17,13 @@ RSpec.describe Tutorial, type: :model do
   end
 
   describe 'instance_methods' do
-    it 'has_videos?' do
+    it 'videos?' do
       tutorial_1 = create :tutorial
       tutorial_2 = create :tutorial
       create :video, tutorial: tutorial_1
 
-      expect(tutorial_1.has_videos?).to be true 
-      expect(tutorial_2.has_videos?).to be false
+      expect(tutorial_1.videos?).to be true 
+      expect(tutorial_2.videos?).to be false
     end
   end
 end

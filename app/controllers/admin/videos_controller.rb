@@ -1,5 +1,4 @@
 class Admin::VideosController < Admin::BaseController
-  
   def create
     begin
       video.save

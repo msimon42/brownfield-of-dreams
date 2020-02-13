@@ -1,7 +1,8 @@
 class TutorialFacade < SimpleDelegator
-  def initialize(tutorial, video_id = nil)
+  def initialize(tutorial, video_id = nil, user = nil)
     super(tutorial)
     @video_id = video_id
+    @user = user
   end
 
   def current_video
@@ -18,6 +19,11 @@ class TutorialFacade < SimpleDelegator
 
   def play_next_video?
     current_video.position < maximum_video_position
+  end
+
+  def current_user_id
+    return @user.id if @user
+    'visitor'
   end
 
   private

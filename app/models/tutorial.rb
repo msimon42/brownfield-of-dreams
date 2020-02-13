@@ -5,7 +5,6 @@ class Tutorial < ApplicationRecord
   scope :non_classroom, -> {where classroom: false}
 
   def has_videos?
-    return true if videos.count > 0
-    false
+    videos.any?
   end
 end

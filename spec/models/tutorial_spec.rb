@@ -7,12 +7,23 @@ RSpec.describe Tutorial, type: :model do
 
   describe 'class methods' do
     it 'non_classroom' do
-      @tutorial_1 = create :tutorial
-      @tutorial_4 = create :tutorial
-      @tutorial_2 = create :tutorial, classroom: true
-      @tutorial_3 = create :tutorial, classroom: true
+      tutorial_1 = create :tutorial
+      tutorial_4 = create :tutorial
+      tutorial_2 = create :tutorial, classroom: true
+      tutorial_3 = create :tutorial, classroom: true
 
-      expect(Tutorial.non_classroom).to eq([@tutorial_1, @tutorial_4])
+      expect(Tutorial.non_classroom).to eq([tutorial_1, tutorial_4])
+    end
+  end
+
+  describe 'instance_methods' do
+    it 'has_videos?' do
+      tutorial_1 = create :tutorial
+      tutorial_2 = create :tutorial
+      create :video, tutorial: tutorial_1
+
+      expect(tutorial_1.has_videos?).to be true 
+      expect(tutorial_2.has_videos?).to be false
     end
   end
 end

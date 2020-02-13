@@ -5,13 +5,13 @@ RSpec.describe 'As a visitor' do
     before(:each) do
       @tutorial = create(:tutorial)
       @video = create(:video, tutorial: @tutorial)
-      visit '/tutorials/1?video_id=1'
+      visit tutorial_path(@tutorial, video_id: @video.id)
 
       click_on 'Bookmark'
     end
 
     it 'I remain on the page' do
-      expect(current_path).to eq('/tutorials/1?video_id=1')
+      expect(page).to have_current_path(tutorial_path(@tutorial, video_id: @video.id))
     end
 
     it 'I see a flash message alerting me that I need to be logged in' do
